@@ -15,7 +15,8 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:5173',
       'https://crud-mern-three-omega.vercel.app',
-      'https://crud-mern-32xrglv8y-gustavos-projects-131b8237.vercel.app' // Incluye cualquier URL adicional que uses
+      'https://crud-mern-32xrglv8y-gustavos-projects-131b8237.vercel.app', // Incluye cualquier URL adicional que uses
+      'https://crud-mern-r67bdekxw-gustavos-projects-131b8237.vercel.app'
     ];
 
     // Permite peticiones sin origen (p. ej., postman) y dominios permitidos
