@@ -3,7 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 console.log(API_URL, 'MI API FRONTEND RAILWAY');
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: API_URL,
   withCredentials: true,
 })
 
