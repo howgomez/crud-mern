@@ -1,4 +1,4 @@
-import { AppDispatch, RootState } from "../store"
+import { AppDispatch } from "../store"
 import { Task } from "../types/types";
 import { createTask, loadPrivateTask, loadPublicTasks, loadUserTasks, setTasksError, setTasksLoading, updateTask } from "./taskSlice";
 
@@ -11,7 +11,7 @@ export const fetchUserTasks = () => {
     dispatch(setTasksLoading(true));  
 
     try {
-      const response = await fetch(`${API_URL}api/task`, {
+      const response = await fetch(`${API_URL}/api/task`, {
         method: "GET",
         credentials: "include"
       })
@@ -24,7 +24,6 @@ export const fetchUserTasks = () => {
 
       const publicTasks = data.filter((task) => task.visibility === "public");
       const privateTasks = data.filter((task) => task.visibility === "private");
-      console.log("Tareas obtenidas: ", data);
 
       dispatch(loadUserTasks(data)); // Guarda en userTasks
       dispatch(loadPublicTasks(publicTasks));
@@ -43,7 +42,7 @@ export const fetchPublicTasks = () => {
   return async (dispatch: AppDispatch) => {
     dispatch(setTasksLoading(true));
     try {
-      const response = await fetch(`${API_URL}api/task/public`, {
+      const response = await fetch(`${API_URL}/api/task/public`, {
         method: "GET",
       });
 
@@ -69,7 +68,7 @@ export const fetchPrivateTasks = () => {
   return async (dispatch: AppDispatch) => {
     dispatch(setTasksLoading(true));
     try {
-      const response = await fetch(`${API_URL}api/task/private`, {
+      const response = await fetch(`${API_URL}/api/task/private`, {
         method: "GET",
         credentials: "include",
       });
@@ -80,7 +79,6 @@ export const fetchPrivateTasks = () => {
       }
   
       const data: Task[] = await response.json();
-      console.log("Tareas obtenidas: ", data);
   
       dispatch(loadPrivateTask(data)); // Guarda en userTasks
       dispatch(setTasksLoading(false));
@@ -98,7 +96,7 @@ export const startCreateTask = ( taskData: FormData ) => {
     dispatch(setTasksLoading(true));
   
     try {
-      const response = await fetch(`${API_URL}api/task`, {
+      const response = await fetch(`${API_URL}/api/task`, {
         method: "POST",
         credentials: "include",
         body: taskData,
@@ -110,7 +108,6 @@ export const startCreateTask = ( taskData: FormData ) => {
       }
 
       const data: Task = await response.json();
-      console.log("Tarea creada con éxito: ", data);
 
       dispatch(createTask(data));
       dispatch(fetchPublicTasks())
@@ -129,7 +126,7 @@ export const startDeleteTask = (tasIk: string) => {
     dispatch(setTasksLoading(true));
   
     try {
-      const response = await fetch(`${API_URL}api/task/${tasIk}`, {
+      const response = await fetch(`${API_URL}/api/task/${tasIk}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -150,12 +147,10 @@ export const startDeleteTask = (tasIk: string) => {
 }
 
 export const startUpdateTask = (taskId: string, formData: FormData) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(setTasksLoading(true));
-    console.log(formData);
-    console.log(getState);
     try {
-      const response = await fetch(`${API_URL}api/task/${taskId}`, {
+      const response = await fetch(`${API_URL}/api/task/${taskId}`, {
         method: "PUT",
         credentials: "include",
         body: formData,  // Pasamos formData directamente, sin JSON.stringify
@@ -167,7 +162,6 @@ export const startUpdateTask = (taskId: string, formData: FormData) => {
       }
 
       const data: Task = await response.json();
-      console.log("Tarea actualizada con éxito: ", data);
 
       dispatch(updateTask(data));
       dispatch(fetchPublicTasks());
@@ -175,7 +169,6 @@ export const startUpdateTask = (taskId: string, formData: FormData) => {
 
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Ocurrió un error";
-      console.log(errorMessage);
       dispatch(setTasksError(errorMessage));
     }
   }

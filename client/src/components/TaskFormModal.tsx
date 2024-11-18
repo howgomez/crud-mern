@@ -21,7 +21,6 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({ task, isOpen, setIsOpen }
   const [image, setImage] = useState<File | null>(null);
   const [isVisible, setIsVisible] = useState(task ? task.visibility === 'private' : false);
   const dispatch = useAppDispatch();
-  console.log(error);
   
   const modalBackgroundRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);

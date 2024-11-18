@@ -21,7 +21,6 @@ export const startRegisterUser = ({username, email, password }: RegisterRequest)
       dispatch(login({ id, email, username }));
     } catch (error ) {
       const err = error as AxiosError<{ message: string }>;
-      console.log(err.response?.data);
     
       dispatch(logout({ errorMessage: err.response?.data.message }));
       
@@ -34,16 +33,12 @@ export const startLoginUser = ({ email, password }: LoginRequest) => {
     dispatch(checkingCredentials());
     try {
       const response = await login_request({ email, password });
-
-      console.log(response.data);
       
       const { id, username } = response.data;
 
       dispatch(login({ id, email, username }));
     } catch (error ) {
       const err = error as AxiosError<{ message: string }>;
-      console.log(err.response?.data);
-
       dispatch(logout({ errorMessage: err.response?.data.message }));
       
     }
@@ -61,8 +56,8 @@ export const verifyToken = () => {
       dispatch(login({ id, email, username }));
 
     } catch (error) {
-      console.log(error);
-      dispatch(logout({ errorMessage: '' }));
+      const err = error as AxiosError<{ message: string }>;
+      dispatch(logout({ errorMessage: err.response?.data.message }));
     }
   }
 }
@@ -76,8 +71,8 @@ export const logoutUser = () => {
       dispatch(logout({ errorMessage: '' }));
 
     } catch (error) {
-      console.log(error);
-      dispatch(logout({ errorMessage: "Logout failed" }));
+      const err = error as AxiosError<{ message: string }>;
+      dispatch(logout({ errorMessage: err.response?.data.message }));
     }
   }
 }
