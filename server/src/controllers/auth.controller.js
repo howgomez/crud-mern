@@ -97,12 +97,10 @@ export const logout = async (req, res) => {
 
   console.log(req.cookies);
 
-
   res.clearCookie("token", {
     httpOnly: true,
     secure: 'true',
-    sameSite: "strict", // Controla el acceso a la cookie en diferentes sitios
-    path: "/"
+    sameSite: "none", // Controla el acceso a la cookie en diferentes sitios
   });
 
   return res.status(200).json({ message: "Logged out successfully" });
