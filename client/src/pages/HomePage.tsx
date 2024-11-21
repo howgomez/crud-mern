@@ -12,7 +12,7 @@ export const HomePage = () => {
         </p>
       </article>
       <div className=' bg-black/50 rounded-3xl flex'>
-        <img src="https://res-console.cloudinary.com/react-curso2024/media_explorer_thumbnails/b33e9211b8788ae05d7a3fe9ba2e2cb7/detailed" alt="Screenshot-2023-05-11-at-14-02-01" className='rounded-3xl' />
+        <img src="https://res.cloudinary.com/react-curso2024/image/upload/v1732210787/ore62nuxxdlxhpxpdcty.png" alt="Screenshot-2023-05-11-at-14-02-01" className='rounded-3xl' />
       </div>
     </section>
     </main>
