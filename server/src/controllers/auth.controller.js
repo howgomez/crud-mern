@@ -26,6 +26,7 @@ export const register = async (req, res) => {
       id: savedUser._id,
     })
 
+    if (!token) return res.status(400).json({ message: "Error creating token" });
     res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
 
     return res.status(201).json({
@@ -94,9 +95,12 @@ export const verifyToken = async (req, res) => {
 
 export const logout = async (req, res) => {
 
+  console.log(req.cookies);
+
+
   res.clearCookie("token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: 'true',
     sameSite: "strict", // Controla el acceso a la cookie en diferentes sitios
     path: "/"
   });

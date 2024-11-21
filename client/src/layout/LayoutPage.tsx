@@ -14,7 +14,8 @@ export const LayoutPage = ({ children }: LayoutPageProps) => {
   return (
     <div className="bg-gray-900 min-h-screen">
       {
-        status === 'notAuthenticated' ? <NavPages /> : <NavBar />
+
+        status === 'authenticated' ? <NavBar /> : <NavPages />
       }
 
       {children}
