@@ -54,7 +54,7 @@ export const verifyToken = () => {
 
       const { id,email, username } = response.data;
       dispatch(login({ id, email, username }));
-
+      
     } catch (error) {
       const err = error as AxiosError<{ message: string }>;
       dispatch(logout({ errorMessage: err.response?.data.message }));

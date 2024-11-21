@@ -71,7 +71,7 @@ export const verifyToken = async (req, res) => {
   try {
     // || req.headers.authorization?.split(" ")[1]
     const token = req.cookies.token;
-    if (!token) return res.status(400).json({ message: "No token provided" });
+    if (!token) return res.status(400);
 
     jwt.verify(token, SECRET_KEY, async (err, decoded) => {
       if (err) return res.status(400).json({ message: "Invalid token" });
@@ -93,7 +93,7 @@ export const verifyToken = async (req, res) => {
 }
 
 export const logout = async (req, res) => {
-  
+
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

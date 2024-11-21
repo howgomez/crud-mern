@@ -12,7 +12,7 @@ export const HomePage = () => {
         </p>
         </article>
         <div className=' bg-black/50 rounded-3xl flex'>
-          <img src="../assets/phonepage.png" alt="Screenshot-2023-05-11-at-14-02-01" className='rounded-3xl' />
+          <img src="../../public/homepage.png" alt="Screenshot-2023-05-11-at-14-02-01" className='rounded-3xl' />
         </div>
       </section>
     </main>
