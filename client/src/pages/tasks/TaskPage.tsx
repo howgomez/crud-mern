@@ -17,9 +17,9 @@ const TaskPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   if (!task) return navigate('/dashboard');
-  
-  
-  const onDeleteTask = async ()  => {
+
+
+  const onDeleteTask = async () => {
     try {
       await dispatch(startDeleteTask(task._id));
       navigate('/dashboard');
@@ -29,18 +29,18 @@ const TaskPage = () => {
     }
 
   }
-  
+
 
   return (
-    <section className='bg-gray-900 flex flex-col-reverse xl:grid xl:grid-cols-2 h-full mt-20 p-4 animate__animated animate__fadeInLeft'>
-      
+    <section className='bg-gray-900 flex flex-col-reverse xl:grid xl:grid-cols-2 mt-20 p-4 animate__animated animate__fadeInLeft w-full '>
+
       {/* Modal de edición */}
-      <TaskFormModal 
-        task={task} 
-        isOpen={isModalOpen} 
-        setIsOpen={setIsModalOpen} 
+      <TaskFormModal
+        task={task}
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
       />
-      <article className=''>
+      <article className='w-full h-auto'>
         <h1 className='text-xl text-white py-4'>Tareas privadas</h1>
         <div className='grid grid-cols-2 xl:flex  xl:flex-wrap  gap-2'>
           {privateTasks.map((task) => (
@@ -58,27 +58,27 @@ const TaskPage = () => {
           ))}
         </div>
       </article>
-      <article className='w-full h-auto  md:w-[600px] md:h-[600px] border-2 border-white/50 rounded-md shadow-lg flex flex-col m-auto '>
-        {task.image && <img src={task.image} alt={task.title || 'Task Image'} className='w-full h-full object-cover' />}
+      <article className='w-full h-full border-2 border-white/50 rounded-md shadow-lg flex flex-col m-auto '>
+        {task.image && <img src={task.image} alt={task.title || 'Task Image'} className='w-full h-[500px] object-cover' />}
         <div className='text-left p-4'>
           <h1 className='text-white text-3xl font-bold'>{task.title}</h1>
           <p className='text-white text-md'>{task.description}</p>
         </div>
         <div className='flex gap-2 p-4'>
           {/* Botón para abrir el modal de actualización */}
-          <button 
-            onClick={() => setIsModalOpen(true)} 
+          <button
+            onClick={() => setIsModalOpen(true)}
             className="bg-blue-500 px-4 py-1 rounded-md text-white"
           >
             Update
           </button>
 
           {/* Botón para eliminar la tarea */}
-      
-            <button onClick={onDeleteTask} className="flex text-1xl items-center gap-2 bg-red-500 px-4 py-1 rounded-md text-white">
-              <RiDeleteBin5Line/>
-              <span>Delete</span>
-            </button>
+
+          <button onClick={onDeleteTask} className="flex text-1xl items-center gap-2 bg-red-500 px-4 py-1 rounded-md text-white">
+            <RiDeleteBin5Line />
+            <span>Delete</span>
+          </button>
         </div>
         <div className='text-white p-4 text-xs'>
           Created at: {task.createdAt ? format(new Date(task.createdAt), "MMMM D, YYYY h:mm a") : 'Fecha no disponible'}
